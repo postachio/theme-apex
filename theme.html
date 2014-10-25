@@ -100,10 +100,6 @@
                     {% if is_home or is_tag %} {% if is_tag %}
 
                     <h2 class="tag-header">Показаны все посты с тегом {{ tag }}:</h2>{% endif %} {% if posts %}
-                    <div class="blog-pagination">
-                        {% if pagination.prev %}<a class="pagination-newer" href="{{ pagination.prev }}" title="Новые записи ">← Новые записи</a>{% endif %}
-                        {% if pagination.next %}<a class="pagination-older" href="{{ pagination.next }}" title="Старые записи ">Старые записи →</a>{% endif %}
-                    </div>
                     <section class="blog-feed">
                         {% for post in posts %}
 
@@ -125,7 +121,10 @@
                                     </div>
                                 </div>
                             </header>
-
+<div class="blog-pagination">
+                        {% if pagination.prev %}<a class="pagination-newer" href="{{ pagination.prev }}" title="Новые записи ">← Новые записи</a>{% endif %}
+                        {% if pagination.next %}<a class="pagination-older" href="{{ pagination.next }}" title="Старые записи ">Старые записи →</a>{% endif %}
+                    </div>
                             <div class="post-body">
                                 <div class="post-content" data-type-cleanup="true">
                                     {{ post.content }}
