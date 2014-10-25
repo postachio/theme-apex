@@ -80,15 +80,15 @@
                 <nav class="site-nav">
                     <div class="nav-menu">
                         <ul class="nav-menu">
-                            <li><a href="{{ site.base_url}}">Blog.</a></li>
+                            <li><a href="{{ site.base_url}}">Blog</a></li>
                             <li><a class="{{ set_active( '/tag/evernote') }}" href="/tag/evernote">Evernote</a></li>
                             <li><a class="{{ set_active( '/tag/postachio') }}" href="/tag/postachio">Postach.io</a></li>
 			    <li><a class="{{ set_active( '/tag/quick-tip') }}" href="/tag/quick-tip">Быстрый совет</a></li>
 			    <li><a class="{{ set_active( '/tag/review') }}" href="/tag/review">Обзоры</a></li>
 			    <li><a class="{{ set_active( '/tag/etc') }}" href="/tag/etc">Прочее</a></li>
-			    <li style="list-style: none">{% for page in pages %}</li>
+			    <li>{% for page in pages %}</li>
 			    <li><a class="{{set_active(page.permalink) }}" href="{{ page.permalink }}">{{ page.title }}</a></li>
-			    <li style="list-style: none">{% endfor %}</li>
+			    <li>{% endfor %}</li>
                         </ul>
                     </div>
                 </nav>{% endif %}
