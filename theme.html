@@ -93,13 +93,13 @@
                  {% if site.tags %}
 
                 <div class="tags" name="top">
-                    <p>Посмотреть все записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
+                    <p>Посмотреть последние записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
                 </div>{% endif %} <!--End Tags-->
 
                 <div class="site-content">
                     {% if is_home or is_tag %} {% if is_tag %}
 
-                    <h2 class="tag-header">Показаны все посты с тегом {{ tag }}:</h2>{% endif %} {% if posts %}
+                    <h2 class="tag-header">Показаны последние посты с тегом {{ tag }}:</h2>{% endif %} {% if posts %}
                     <section class="blog-feed">
                         {% for post in posts %}
                         <article class="blog-post feed-item">
