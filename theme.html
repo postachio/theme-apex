@@ -127,12 +127,14 @@
                                 </div>
                             </div>
                         </article>{% endfor %}
-                    </section>
-                    {% else %}
-<div class="blog-pagination">
+                        <!--test-->
+                    <div class="blog-pagination">
                         {% if pagination.prev %}<a class="pagination-newer" href="{{ pagination.prev }}" title="Новые записи ">← Новые записи</a>{% endif %}
                         {% if pagination.next %}<a class="pagination-older" href="{{ pagination.next }}" title="Старые записи ">Старые записи →</a>{% endif %}
                     </div>
+                     <!--test-->
+                    </section>
+                    {% else %}
                     <div class="blog-feed">
                         <h2 class="title"><em>Пока нет постов :(</em></h2>
                     </div>{% endif %} {% if not is_tag and posts %}
