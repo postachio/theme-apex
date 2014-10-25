@@ -39,6 +39,9 @@
 </head>
 
 <body>
+    {% set skiptags = ['etc', 'review', 'quick-tip'] %}
+    {{ header_meta }}
+    {% if is_login %} {{ login_form }} {% else %}
     <!--Header-->
     <div class="site-header">
         <div class="container">
