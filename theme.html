@@ -1,246 +1,313 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8">
-    <title>
-      {% if is_login %}Login
-      {% elif is_home %}{{ site.author }}
-      {% elif is_tag %}{{ tag }}
-      {% elif post %}{{ post.title }}
-      {% endif %}
-      | {{ site.name }}
-    </title>
-
-    {{ header_meta }}
-
-    <link rel="stylesheet" type="text/css" href="{{ assets('css/style.css') }}">
-
-    <!--[if IE 7]>
-      <link href="http://postach.io/static/themes/_assets/fontawesome/css/font-awesome-ie7.min.css" rel="stylesheet">
+<!--[if lt IE 9]>
+    <html class="no-js lt-ie9 lt-ie8 lt-ie7">
     <![endif]-->
+<!--[if IE 7]>
+        <html class="no-js lt-ie9 lt-ie8">
+        <![endif]-->
+<!--[if IE 8]>
+            <html class="no-js lt-ie9">
+            <![endif]-->
+<!--[if gt IE 8]>
+                <!-->
 
-    <!--
-    <style>
-      /**
-       * Your custom override CSS goes here. If you wanted to override the default link colour and hover state, you would do this:
-       *
-       *  a {
-       *      color: #333; /* Override the default colour with a not-quite-black that is easy on the eyes on white screens */
-       *  }
-       *
-       *  a:hover {
-       *      color: #545454; /* This will now change the hover state as well */
-       *  }
-       *
-       *  You can put anything you want to override in here, so be creative!
-       */
-    </style>
-    -->
+<html class="no-js">
+<!--<![endif]-->
 
-    {% if site.analytics %}
-    <script>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '{{ site.analytics }}']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
-    {% endif %}
-  </head>
-  <body>
+<head>
+    <meta charset="utf-8">
 
-    {% if is_login %}
+    <title>{% if is_login %}Login {% elif is_home %}{{ site.author }} {% elif is_tag %}{{ tag }} {% elif post.type == 'post' %}{{ post.title }} {% elif post.type == 'link' %}{{ link.title }} {% elif post.type == 'page' %}{{ page.title }} {% endif %} | {{ site.name }}</title>
+    <link href="//themarfa.name/img/ico/ico1.png" rel="icon" type="image/png">
+    <link href="//themarfa.name/img/ico/ico2.png" rel="icon" type="image/png">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" rel="stylesheet">
+    <link href="//themarfa.name/css/blog.170720142.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Open+Sans:400italic,700italic,400,700&subset=latin,cyrillic' rel='stylesheet'>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>-->
+    <link href="//themarfa.name/humans.txt" rel="author" type="text/plain">
+    <meta name="google-site-verification" content="GfbHrDkzA8a2W9c0BeHsuRRdMm9igMBL1u_NA9Q0OF0" />
+	<!-- BEGIN Tynt Script -->
+	<script>
+	if(document.location.protocol=='http:'){
+	var Tynt=Tynt||[];Tynt.push('dvuHpo6pur450nacwqm_6l');
+	(function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+	}
+	</script>
+	<!-- END Tynt Script --> 
+</head>
 
-      {{ login_form }}
-
-    {% else  %}
-
-    <div class="row">
-      <div class="span4 header">
-        <div class="bg-img" style="background-image: url('{% if site.cover_photo %}{{ site.cover_photo }}{% else %}{{ assets['background.jpg'] }}{% endif %}');"></div>
-        <div class="gradient"></div>
-        <div class="title">
-          <h1>{{ site.name }}</h1>
-          <ul class="social">
-            {% if site.twitter %}
-            <li>
-              <a href="{{ site.twitter }}" title="Twitter" target="_blank">
-                <i class="icon-twitter"></i> Twitter
-              </a>
-            </li>
-            {% endif %}
-
-            {% if site.facebook %}
-            <li>
-              <a href="{{ site.facebook }}" title="Facebook" target="_blank">
-                <i class="icon-facebook-sign"></i> Facebook
-              </a>
-            </li>
-            {% endif %}
-
-            {% if site.googleplus %}
-            <li>
-              <a href="{{ site.googleplus }}?rel=author" title="Google+" target="_blank">
-                <i class="icon-google-plus"></i> Google+
-              </a>
-            </li>
-            {% endif %}
-
-            {% if site.linkedin %}
-            <li>
-              <a href="{{ site.linkedin }}" title="LinkedIn" target="_blank">
-                <i class="icon-linkedin"></i> LinkedIn
-              </a>
-            </li>
-            {% endif %}
-            <li>
-              <a href="{{ site.atom_url }}" title="RSS" target="_blank">
-                <i class="icon-rss"></i> RSS
-              </a>
-            </li>
-          </ul>
-        </div>
-        <a class="logo" href="/">
-          <img class="avatar" src="{{ site.avatar }}" alt="{{ site.author }}" width="100%" height="100%" />
-        </a>
-        <div class="site-description">
-          <ul>
-          <li><a href="/">Blog</a></li>
-          {% if pages %}
-          {% for page in pages %}
-          <li><a href="{{ page.permalink }}" class="{{ set_active(page.permalink) }}">{{ page.title }}</a></li>
-          {% endfor %}
-          {% endif %}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="row wrapper">
-
-      <div class="span4 spacer"></div>
-
-      {% if is_home or is_tag %}
-
-      <div class="span6 offset1 posts">
-
-          {% if is_tag %}
-          <h4 class="sub-heading span6">Showing all posts tagged {{ tag }}:</h4>
-          {% endif %}
-
-          {% if posts %}
-          {% for post in posts %}
-          <div class="post span6">
-            <div class="row">
-              <div class="span6">
-                <h2><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
-              </div>
-            </div>
-            <div class="post-body" data-type-cleanup="true">
-              {{ post.content }}
-            </div>
-            <div class="post-info">
-              <div class="info-left">
-                <p class="date">{{ post.created_at|format_date }}</p>
-              </div>
-              <div class="info-right">
-                <p class="read-more"><a href="{{ post.permalink }}">Read More &raquo;</a></p>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% if not is_tag %}
-          <div class="pagination span6">
-            {% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
-            {% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
-          </div>
-          {% endif %}
-          {% else %}
-          <h4 class="sub-heading span6">No Posts Yet :(</h4>
-          {% endif %}
-      </div>
-
-      {% elif post %}
-
-      <div class="span6 offset1 posts">
-        <div class="post whole span6">
-          <h1>{{ post.title }}</h1>
-          <div class="post-info">
-            <div class="info-left">
-              <p class="date">{{ post.created_at|format_date }}</p>
-            </div>
-            <div class="info-right">
-              <p class="comments">
-                <a href="/"><i class="icon-comment"></i> 0</a>
-              </p>
-            </div>
-          </div>
-          <div class="post-body">
-            <div class="post-content" data-type-cleanup="true">
-              {{ post.content }}
-            </div>
-
-            {% if post.type == 'link' %}
-            <p><a href="{{ post.url }}"><i class="icon-share"></i> {{ post.url }}</a></p>
-            {% endif %}
-
-            {{ theme.social.bar }}
-
-            {% if post.tags %}
-            <ul class="post-tags">
-            {% for tag in post.tags %}
-              <li><a href="/tag/{{ tag }}">{{ tag|format_tag(link=False, humanize=True) }}</a></li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-          <div class="post-footer">
-            <p class="back"><a href="/">&laquo; Go Back</a></p>
-          </div>
-          {% if site.disqus %}
-          <div class="post-comments">
-            <div id="disqus_thread"></div>
-            <script>
-              var disqus_shortname = '{{ site.disqus }}';
-              var disqus_url = '{{site.base_url}}{{ post.permalink }}';
-              (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-              })();
-            </script>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-
-    {% elif post.type == 'page' %}
-
-      <div class="span6 offset1 posts">
-        <div class="post whole span6">
-          <h1>{{ page.title }}</h1>
-          <div class="post-body" data-type-cleanup="true">
-            {{ page.content }}
-          </div>
-          <div class="post-footer">
-            <p class="back"><a href="/">&laquo; Go Back</a></p>
-          </div>
-        </div>
-      </div>
-
-    {% endif %}
-
-    </div>
-
-    {% endif %}
-
-    {{ footer_meta }}
-
-    <!-- bootstrap -->
-    <script src="http://postach.io/static/themes/_assets/bootstrap/js/bootstrap.min.js" /></script>
+<body>
+    {% set skiptags = ['etc', 'review', 'quick-tip'] %}
+    {{ header_meta }}
+    {% if is_login %} {{ login_form }} {% else %}
+    <!--Header-->
     
-  </body>
+
+
+    <div class="site-header">
+        <div class="container">
+            <div class="row">
+                <div class="sixteen columns">
+                    <!--Title-->
+
+                    <h1 class="site-title"><a href="/">{{ site.name }}</a></h1>
+
+                    <div class="site-avatar"><img alt="{{ site.author}} " src="{{site.avatar}}"></div>
+                    <!--Contacts-->
+
+                    <p class="site-bio">{{ site.bio }}</p>
+                    <a href="{{ site.twitter }}" target="_blank"><img src="//themarfa.name/img/etc/header/twitter-3.png" alt="Twitter"></a>
+                    <a href="{{ site.facebook }}" target="_blank"><img src="//themarfa.name/img/etc/header/facebook.png" alt="facebook"></a>
+                    <a href="{{ site.googleplus }}" target="_blank"><img src="//themarfa.name/img/etc/header/google.png" alt="google"></a>
+                    <a href="{{ site.linkedin }}" target="_blank"><img src="//themarfa.name/img/etc/header/linkedin.png" alt="linkedin"></a>
+                    <a href="{{ site.atom_url }}" target="_blank"><img src="//themarfa.name/img/etc/header/rss.png" alt="rss"></a>
+                    <!--End Contatcs-->
+                    <!--End Title-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Header-->
+
+    <div class="container">
+        <div class="row">
+            <div class="fourteen columns offset-by-two">
+                {% if pages %}
+                <!--Navigation-->
+
+                <nav class="site-nav">
+                    <div class="nav-menu">
+                        <ul class="nav-menu">
+                            <li><a href="{{ site.base_url}}">Blog</a></li>
+                            
+                            <li><a class="{{ set_active( '/tag/evernote') }}" href="/tag/evernote">Evernote</a></li>
+                            
+                            <li><a class="{{ set_active( '/tag/postachio') }}" href="/tag/postachio">Postach.io</a></li>
+
+                            <li><a class="{{ set_active( '/tag/quick-tip') }}" href="/tag/quick-tip">Быстрый совет</a></li>
+
+                            <li><a class="{{ set_active( '/tag/review') }}" href="/tag/review">Обзоры</a></li>
+
+                            <li><a class="{{ set_active( '/tag/etc') }}" href="/tag/etc">Прочее</a></li>
+
+                            <li style="list-style: none">{% for page in pages %}</li>
+
+                            <li><a class="{{set_active(page.permalink) }}" href="{{ page.permalink }}">{{ page.title }}</a></li>
+
+                            <li style="list-style: none">{% endfor %}</li>
+                        </ul>
+                    </div>
+                </nav>{% endif %}
+                <!--End Navigation-->
+                 <!--Tags-->
+                 {% if site.tags %}
+
+                <div class="tags" name="top">
+                    <p>Посмотреть все записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
+                </div>{% endif %} <!--End Tags-->
+
+                <div class="site-content">
+                    {% if is_home or is_tag %} {% if is_tag %}
+
+                    <h2 class="tag-header">Показаны все посты с тегом {{ tag }}:</h2>{% endif %} {% if posts %}
+
+                    <section class="blog-feed">
+                        {% for post in posts %}
+
+                        <article class="blog-post feed-item">
+                            <header class="post-header">
+                                <h2 class="post-title"><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
+
+                                <div class="post-metadata">
+                                    <div class="left">
+                                        <p class="post-byline">Автор: <a href="//plus.google.com/111180224387193909348?rel=author">{{ site.author }}</a>. Дата: <time class="post-date" datetime="{{ post.created_at }}">{{ post.created_at|date_format }}</time></p>
+                                    </div>
+
+                                    <div class="right">
+                                        {% if post.tags %}
+
+                                        <div class="post-tags">
+                                            Теги: {{ post.tags|format_tags(humanize=True) }}
+                                        </div>{% endif %}
+                                    </div>
+                                </div>
+                            </header>
+
+                            <div class="post-body">
+                                <div class="post-content" data-type-cleanup="true">
+                                    {{ post.content }}
+                                    {% if post.type == 'link' or post.type == 'webclip' %}  {% endif %} <a class="post-readmore" href="{{ post.permalink }}" title="Читать полностью ">Читать полностью</a>
+                                </div>
+                            </div>
+                        </article>{% endfor %}
+                    </section>{% else %}
+
+                    <div class="blog-feed">
+                        <h2 class="title"><em>Пока нет постов :(</em></h2>
+                    </div>{% endif %} {% if not is_tag and posts %} {% if pagination.next or pagination.prev %}
+
+                    <div class="blog-pagination">
+                        {% if pagination.prev %}<a class="pagination-newer" href="{{ pagination.prev }}" title="Новые записи ">← Новые записи</a>{% endif %}
+                        {% if pagination.next %}<a class="pagination-older" href="{{ pagination.next }}" title="Старые записи ">Старые записи →</a>{% endif %}
+                    </div>{% endif %} {% endif %} {% elif post.type == 'post' %}
+
+                    <article class="blog-post post-single">
+                        <section class="post-body">
+                            <!--Share-->
+                              <script type="text/javascript">(function() {
+                                      if (window.pluso) {return};
+                                       var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                       s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                       s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://x.pluso.ru/pluso-x.js';
+                                       var h=d[g]('body')[0];
+                                       h.appendChild(s);
+                                    })();
+                                 </script>
+                        <div class="pluso-engine" pluso-sharer={"buttons":"vkontakte,facebook,twitter,google,surfingbird,liveinternet,evernote,print,more","style":{"size":"small","shape":"round","theme":"theme14","css":"background:transparent"},"orientation":"vertical","multiline":false} ></div> 
+                        <!--End Share-->
+                            <header class="post-header">
+                                <div class="header-top">
+                                    <h1 class="post-title">{{ post.title }}</h1>
+                                </div>
+
+                                <div class="post-metadata">
+                                    <p class="post-byline left">Автор: <a href="//plus.google.com/111180224387193909348?rel=author">{{ site.author }}</a>.
+                                    Дата: <time class="post-date" datetime="{{ post.created_at }}">{{ post.created_at|date_format }}</time></p>{% if post.tags %}
+
+                                    <div class="post-tags right">
+                                        Теги: {{ post.tags|format_tags(humanize=True) }}
+                                    </div>{% endif %}
+                                </div>
+                            </header>
+
+                            <div class="post-content" data-type-cleanup="true">
+                                <!--Poсket-->
+                                <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+                                <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+                                <!--End Pocket-->
+                                <!--Post text-->
+                                {{ post.content }}
+                                <!--End Post text-->
+                                <!--Ophus-->
+                                <script src="//themarfa.name/js/orphus.js"></script>
+                                <p class="orphus">Нашел ошибку? Выдели ее и нажми CTRL+Enter. <a href="//orphus.ru" id="orphus" target="_blank"><img alt="Система Orphus" src="//themarfa.name/js/orphus.png"></a></p>
+                                <!--End Orphus-->
+                                <br>
+                            </div>
+                        </section>
+                            <!--Google Adsence-->
+							<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- blog larg 2 -->
+							<ins class="adsbygoogle"
+							     style="display:inline-block;width:468px;height:60px"
+							     data-ad-client="ca-pub-6070814285497936"
+							     data-ad-slot="4759078806"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+                            <!--End Google Adsence-->                        
+                        <!--Comments-->
+                        {% if site.disqus %}
+                        <section class="comments">
+                            <hr class="large">
+                            <div id="disqus_thread"></div><script type="text/javascript">
+                                                var disqus_shortname = '{{ site.disqus }}';
+                                                (function() {
+                                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                                })();
+                            </script> <noscript>Пожалуйста, включите JavaScript чтобы <a href="http://disqus.com/?ref_noscript">увидеть комментарии.</a></noscript> <a class="dsq-brlink" href="http://disqus.com">Комментарии от <span class="logo-disqus">Disqus</span></a>
+                        </section>{% endif %}
+                        <!--End Comments-->
+                    </article>{% elif post.type == 'link' %}
+
+                    <article class="blog-post post-single">
+                        <section class="post-body">
+                        <!--Share-->
+                              <script type="text/javascript">(function() {
+                                      if (window.pluso) {return};
+                                       var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                       s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                       s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://x.pluso.ru/pluso-x.js';
+                                       var h=d[g]('body')[0];
+                                       h.appendChild(s);
+                                    })();
+                                 </script>
+                        <div class="pluso-engine" pluso-sharer={"buttons":"vkontakte,facebook,twitter,google,surfingbird,liveinternet,evernote,print,more","style":{"size":"small","shape":"round","theme":"theme14","css":"background:transparent"},"orientation":"vertical","multiline":false} ></div> 
+                        <!--End Share-->
+                            <header class="post-header">
+                                <div class="header-top">
+                                    <h1 class="post-title">{{ link.title }}</h1>
+                                </div>
+
+                                <div class="post-metadata">
+                                    <p class="post-byline left">Автор: <a href="//plus.google.com/111180224387193909348?rel=author">{{ site.author }}</a>. Дата: <time class="post-date" datetime="{{ link.created_at }}">{{ link.created_at|date_format }}</time></p>{% if link.tags %}
+
+                                    <div class="post-tags right">
+                                        Теги: {{ link.tags|format_tags(humanize=True) }}
+                                    </div>{% endif %}
+                                </div>
+                            </header>
+                            <!--Post with link-->
+                            <div class="post-content" data-type-cleanup="true">
+                                <!--Poсket-->
+                                <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+                                <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+                                <!--End Pocket-->
+                                {{ link.content }}
+                                <a class="post-source" href="{{ post.url }}" target="_blank">Источник</a><br><br>
+                                <!--Ophus-->
+                                <script src="//themarfa.name/js/orphus.js"></script>
+                                <p class="orphus">Нашел ошибку? Выдели ее и нажми CTRL+Enter. <a href="//orphus.ru" id="orphus" target="_blank"><img alt="Система Orphus" src="//themarfa.name/js/orphus.png"></a></p>
+                                <!--End Orphus-->
+                            </div>
+                            <!--End Post with link-->
+                        </section>
+                            <!--Google Adsence-->
+							<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- blog larg 2 -->
+							<ins class="adsbygoogle"
+							     style="display:inline-block;width:468px;height:60px"
+							     data-ad-client="ca-pub-6070814285497936"
+							     data-ad-slot="4759078806"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+                            <!--End Google Adsence-->                        
+                        
+                        {% if site.disqus %}
+
+                        <section class="comments">
+                            <hr class="large">
+
+                            <div id="disqus_thread"></div><script type="text/javascript">
+                    var disqus_shortname = '{{ site.disqus }}';
+                                                (function() {
+                                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                                })();
+                            </script> <noscript>Пожалуйста, включите JavaScript чтобы <a href="http://disqus.com/?ref_noscript">увидеть комментарии.</a></noscript> <a class="dsq-brlink" href="http://disqus.com">Комментарии от <span class="logo-disqus">Disqus</span></a>
+                        </section>{% endif %}
+                    </article>{% elif post.type == 'page' %}
+
+                    <div class="blog-page">
+                        <h1 class="page-title">{{ page.title }}</h1>
+
+                        <div class="page-content">
+                            {{ page.content }}
+                        </div>
+                    </div>{% endif %}
+                </div>
+                <p id="back-top"><a href="#top"><span>вверх</span></a></p>
+                <div class="site-footer">
+                    <p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license"><img alt="Лицензия Creative Commons " src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" style="border-width:0"></a> | <a href="//themarfa.name">{{ site.name }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>{% endif %} {{ footer_meta }}
+</body>
 </html>
