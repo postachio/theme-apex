@@ -199,6 +199,7 @@
                             <hr class="large">
                             <div id="disqus_thread"></div><script type="text/javascript">
                                                 var disqus_shortname = '{{ site.disqus }}';
+                                                var disqus_identifier = '{{ post.title }}';
                                                 (function() {
                                                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                                                     var disqus_identifier = '{{ post.title }}';
@@ -270,10 +271,10 @@
                             <hr class="large">
 
                             <div id="disqus_thread"></div><script type="text/javascript">
-                    var disqus_shortname = '{{ site.disqus }}';
+                            var disqus_shortname = '{{ site.disqus }}';
+                            var disqus_identifier = '{{ post.title }}';
                                                 (function() {
                                                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                                                    var disqus_identifier = '{{ post.title }}';
                                                     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                                                 })();
