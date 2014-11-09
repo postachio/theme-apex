@@ -77,7 +77,7 @@
                 <nav class="site-nav">
                     <div class="nav-menu">
                         <ul class="nav-menu">
-                            <li><a href="{{ site.base_url}}">Blog1</a></li>
+                            <li><a href="{{ site.base_url}}">Blog</a></li>
                             <li><a class="{{ set_active( '/tag/evernote') }}" href="/tag/evernote">Evernote</a></li>
                             <li><a class="{{ set_active( '/tag/postachio') }}" href="/tag/postachio">Postach.io</a></li>
 			    <li><a class="{{ set_active( '/tag/quick-tip') }}" href="/tag/quick-tip">Быстрый совет</a></li>
@@ -93,7 +93,7 @@
                  {% if site.tags %}
 
                 <div class="tags" name="top">
-                    <p>Посмотреть последние записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
+                    <p>Посмотреть последние записи по тегу/:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
                 </div>{% endif %} <!--End Tags-->
 
                 <div class="site-content">
