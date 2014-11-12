@@ -93,7 +93,7 @@
                  {% if site.tags %}
 
                 <div class="tags" name="top">
-                    <p>Посмотреть записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
+                    <p>Посмотреть все записи по тегу:</p>{% for tag in site.tags %} {% if tag not in skiptags %}{% endif %} <a href="/tag/{{ tag.name }}">#{{ tag.name }}</a> {% endfor %}
                 </div>{% endif %} <!--End Tags-->
 
                 <div class="site-content">
